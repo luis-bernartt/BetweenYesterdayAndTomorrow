@@ -1,0 +1,31 @@
+1 - menu estilizado, manter start - load - preferences; - DONE
+
+2 - botão de mutar e sair no canto sup direito; - DONE
+
+3 - menu preferences estilizar -DONE
+
+4 - botão mute all -> check box / toggle (global) - DONE
+
+5 - customizar as barrinhas de controle - DONE
+
+6 - display (window - fullscreen) -> em linha com um toggle - DONE
+
+	- skip colocar na linha de baixo e organizar. -DONE (?)
+
+7 - barras de som organizadas cascata - DONE
+
+8 - textbox estilizada (screen say) - Done
+
+9 - mudar quick menu -> só o botão de mutar, quicksave e load -> cant sup direito; - DONE
+
+10 - criar sprites de personagem que piscam (dica: usar como asset char do persona)
+	tempo radom, variar no range; - DONE
+
+11 - efeito de foco no char quando falando. - DONE
+
+12 - save game gerar json.
+
+
+extra:
+	botão de mute all trabalhar sincronizado com as barras de audio - DONE
+	submenu LOAD ter só ele - DONE
