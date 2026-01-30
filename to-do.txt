@@ -14,7 +14,7 @@
 
 7 - barras de som organizadas cascata - DONE
 
-8 - textbox estilizada (screen say) - Done
+8 - textbox estilizada (screen say) - DONE
 
 9 - mudar quick menu -> só o botão de mutar, quicksave e load -> cant sup direito; - DONE
 
@@ -29,3 +29,6 @@
 extra:
 	botão de mute all trabalhar sincronizado com as barras de audio - DONE
 	submenu LOAD ter só ele - DONE
+	estilizado o input
+	estilizado o MENU (+/-)
+	estliziado escolhas
