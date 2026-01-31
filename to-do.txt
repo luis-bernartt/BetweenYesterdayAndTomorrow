@@ -32,3 +32,15 @@ extra:
 	estilizado o input
 	estilizado o MENU (+/-)
 	estliziado escolhas
+	
+
+
+ultimo dia:
+
+1 - adicionar outlines transparentes para evitar que o bg das escolhas fique mudando de tamanho - DONE
+2 - mudar a cor do hover_outline para ter mais contraste
+3 - tirar background do nome do personagem no screen say - DONE
+4 - limitar e corrigir posicionamento da fala no screen say - DONE
+5 - adicionar botão de confirmar no renpy.input() - DONE
+6 - corrigir timed_choice - DONE
+7 - adicionar algum tipo de hoover nos botões de mutar e sair do main menu - DONE

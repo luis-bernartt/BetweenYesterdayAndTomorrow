@@ -16,7 +16,6 @@ init -2:
         yoffset -30
         xmaximum 1100
 
-
     style say_dialogue:
         font "fonts/cursiva.ttf"
         size 56
@@ -41,7 +40,10 @@ init -2:
         font "fonts/cursiva.ttf"
         size 36
         color "#4a3b2a"
-
+        outlines [
+            (2, "#cfeede00", 0, 0),
+            (4, "#9ecfa300", 0, 0),
+        ]
         hover_color "#2f5e4e"
         hover_outlines [
             (2, "#cfeede", 0, 0),
@@ -73,7 +75,11 @@ init -2:
         font "fonts/cursiva.ttf"
         size 40
         color "#4a3b2a"
-
+        outlines [
+            (1, "#2f5e4e", 0, 0),
+            (2, "#cfeede00", 0, 0),
+            (4, "#9ecfa300", 0, 0),
+            ]
         hover_color "#2f5e4e"
         hover_outlines [
             (2, "#cfeede", 0, 0),
@@ -85,6 +91,7 @@ init -2:
 
     style sicredi_confirm_text is sicredi_button_text:
         color "#2f5e4e"
+        outlines [(1, "#1f7a5b", 0, 0)]
         hover_color "#1f7a5b"
 
     style sicredi_confirm_text:
@@ -103,6 +110,10 @@ init -2:
     style choice_button_text:
         font "fonts/cursiva.ttf"
         size 42
+        outlines [
+            (2, "#cfeede00", 0, 0),
+            (4, "#9ecfa300", 0, 0),
+        ]
         color "#3a3328"
 
         hover_color "#2f5e4e"

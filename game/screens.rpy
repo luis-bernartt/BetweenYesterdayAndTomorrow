@@ -133,26 +133,20 @@ screen say(who, what):
             spacing 22
 
             if who is not None:
-                frame:
-                    background Solid("#ffffff88")
-                    padding (18, 10)
-                    xalign 0.5
-                    text who id "who"
+                
+                text who:
+                    id "who"
+                    font "fonts/Bungee-Regular.ttf"
+                    color "#141414ff"
+                    size 30
+                    outlines [(1, "#ffffffaa", 0, 0)]  
 
-            if len(what) > 80:
+            if what is not None:
                 text what:
                     id "what"
                     size 44
                     xalign 0.5
-                    yalign 0.7
-                    text_align 0.5
-                    xmaximum 1000
-            else:
-                text what:
-                    id "what"
-                    size 45
-                    xalign 0.5
-                    yalign 0.7
+                    yalign 0.6
                     text_align 0.5
                     xmaximum 1000
 
@@ -205,18 +199,12 @@ style say_dialogue:
 
     adjust_spacing False
 
-## Input screen ################################################################
-##
-## This screen is used to display renpy.input. The prompt parameter is used to
-## pass a text prompt in.
-##
-## This screen must create an input displayable with id "input" to accept the
-## various input parameters.
-##
-## https://www.renpy.org/doc/html/screen_special.html#input
 
 screen input(prompt):
+
     style_prefix "input"
+
+    default _text = ""
 
     frame:
         background Frame("gui/paper_bg.png", 60, 60)
@@ -235,7 +223,18 @@ screen input(prompt):
             frame:
                 style "input_field_frame"
 
-                input id "input" style "input_text"
+                input:
+                    id "input"
+                    style "input_text"
+                    value ScreenVariableInputValue("_text")
+                    length 18
+
+            textbutton "Confirmar":
+                action Return(_text.strip())
+                sensitive (_text.strip() != "")
+                text_style "input_button_text"
+
+    key "K_RETURN" action Return(_text.strip())
 
 
 
@@ -248,7 +247,7 @@ style input_prompt:
     outlines [(2, "#ffffffaa", 0, 0)]
 
 style input_field_frame:
-    background Solid("#ffffff88")
+    background Solid("#ffffff00")
     padding (25, 18)
     xalign 0.5
     xmaximum 1000
@@ -261,6 +260,21 @@ style input_text:
     xalign 0.0
     text_align 0.0
     xmaximum 950
+
+style input_button_text:
+    font "fonts/cursiva.ttf"
+    size 42
+    outlines [
+        (2, "#cfeede00", 0, 0),
+        (4, "#9ecfa300", 0, 0),
+    ]
+    color "#3a3328"
+
+    hover_color "#2f5e4e"
+    hover_outlines [
+        (2, "#cfeede", 0, 0),
+        (4, "#9ecfa3", 0, 0),
+    ]
 
 
 
@@ -459,9 +473,9 @@ screen main_menu():
         align 0.99, 0.01
         imagebutton:
             idle Transform("gui/audio_button_on.png", zoom=0.2)
-            hover Transform("gui/audio_button_on.png", zoom=0.2)
+            hover Transform("gui/audio_button_on_hovered.png", zoom=0.2)
             selected_idle Transform("gui/audio_button_off.png", zoom=0.2)
-            selected_hover Transform("gui/audio_button_off.png", zoom=0.2)
+            selected_hover Transform("gui/audio_button_off_hovered.png", zoom=0.2)
             selected (
                         preferences.get_volume("music") <= 0.0
                         and preferences.get_volume("sfx") <= 0.0
@@ -471,6 +485,7 @@ screen main_menu():
             
         imagebutton:
             idle Transform("gui/quit_button.png", zoom=0.17)
+            hover Transform("gui/quit_button_hovered.png", zoom=0.17)
             action Quit(confirm=not main_menu)
         
     frame:
@@ -513,14 +528,17 @@ style main_menu_title is main_menu_text
 style menu_frame_text:
     font "fonts/cursiva.ttf"
     color "#d5ddb9"
-    outlines [(2, "#000000", 2, -1)]
-
+    outlines [
+        (2, "#000000", 2, -1),
+        (2, "#cfeede00", 0, 0),
+        (4, "#9ecfa300", 0, 0),
+    ]
+    
     hover_color "#eef4ff"
     hover_outlines [
-        (2, "#9db4d8", 0, 0),
-        (4, "#7a95c8", 0, 0),
-        (6, "#cfdcff", 0, 0),
-    ]
+            (2, "#cfeede", 0, 0),
+            (4, "#9ecfa3", 0, 0),
+        ]
 style main_menu_frame:
     xsize 420
     yfill True

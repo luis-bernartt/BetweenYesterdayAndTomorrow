@@ -85,8 +85,17 @@ transform char_base:
     yalign 1.0
 
 
-screen timed_menu():
+
+
+screen timed_menu(duration=4.0, tick=0.05):
+
     modal True
+
+    default time_left = duration
+
+    timer tick repeat True action SetScreenVariable("time_left", max(0.0, time_left - tick))
+
+    timer 0.01 repeat True action (Return() if time_left <= 0.0 else NullAction())
 
     frame:
         style "timed_frame"
@@ -94,28 +103,57 @@ screen timed_menu():
         yalign 0.45
 
         vbox:
-            spacing 18
+            spacing 16
             xalign 0.5
 
             text "Você tem poucos segundos. Qual é a decisão correta?":
                 style "timed_prompt"
 
-            null height 10
+            $ frac = time_left / duration if duration > 0 else 0.0
+
+            bar:
+                xsize 520
+                ysize 18
+                value AnimatedValue(
+                                        value=frac,
+                                        range=1.0,
+                                        delay=0.05
+                                    )
+                left_bar  "gui/bar/custom_left.png"
+                right_bar "gui/bar/custom_right.png"
+
+            text "[int(time_left + 0.999)]s":
+                size 20
+                xalign 0.5
+                style "timed_prompt"
+
+            null height 8
 
             textbutton "Manteve a disciplina":
                 style "timed_button"
                 text_style "timed_button_text"
-                action [SetVariable("timed_choice", "correct"), Return()]
+                action [
+                    SetVariable("timed_choice", "correct"),
+                    Return()
+                ]
 
             textbutton "Desistiu e fez tudo pelas coxa":
                 style "timed_button"
                 text_style "timed_button_text"
-                action [SetVariable("timed_choice", "wrong"), Return()]
+                action [
+                    SetVariable("timed_choice", "wrong"),
+                    Return()
+                ]
 
             textbutton "Fingiu que fazia tudo e não fazia nada":
                 style "timed_button"
                 text_style "timed_button_text"
-                action [SetVariable("timed_choice", "wrong"), Return()]
+                action [
+                    SetVariable("timed_choice", "wrong"),
+                    Return()
+                ]
+
+
 
 
 screen sicredi_hotspots():
@@ -349,18 +387,17 @@ label chapter_3:
 
 
 label timed_choice_demo:
-    $ timed_choice = None
+
+    $ stress = 0
     $ answered = False
 
     a "Agora, uma mecânica: decisão com tempo."
     a "Só existe uma escolha correta!"
 
     while not answered:
-        $ timed_choice = None
 
-        show screen timed_menu
-        $ renpy.pause(4.0, hard=True)
-        hide screen timed_menu
+        $ timed_choice = None
+        call screen timed_menu(duration=4.0)
 
         if timed_choice is None:
             $ stress += 1
@@ -374,7 +411,6 @@ label timed_choice_demo:
             a "Aqui a ideia é mostrar constância. Tenta de novo."
 
         else:
-            $ stress += 0
             i "Isso. Disciplina total."
             a "Perfeito!"
             $ answered = True
